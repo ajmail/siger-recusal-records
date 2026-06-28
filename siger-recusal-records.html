@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siger Recusal Records — Pennsylvania RTKL 2026-078</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f7f7f5;
+    --red: #c8001a;
+    --gray-100: #f0f0ee;
+    --gray-200: #e0e0dd;
+    --gray-400: #999994;
+    --gray-600: #555552;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* TOP BAR */
+  .topbar {
+    background: var(--black);
+    color: var(--white);
+    padding: 10px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .topbar-left { opacity: 0.5; }
+  .topbar-right { 
+    display: flex; 
+    gap: 24px; 
+    opacity: 0.7;
+  }
+  .topbar-right a {
+    color: var(--white);
+    text-decoration: none;
+  }
+  .topbar-right a:hover { opacity: 1; color: var(--white); }
+
+  /* HERO */
+  .hero {
+    border-bottom: 1px solid var(--black);
+    padding: 64px 32px 48px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .case-number {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--red);
+    font-weight: 500;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-family: var(--mono);
+    font-size: clamp(24px, 4vw, 42px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    max-width: 720px;
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--gray-200);
+    margin-top: 40px;
+  }
+
+  .meta-item {
+    padding: 20px 0;
+    border-right: 1px solid var(--gray-200);
+    padding-right: 24px;
+    margin-right: 24px;
+  }
+  .meta-item:last-child { border-right: none; }
+
+  .meta-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 6px;
+  }
+
+  .meta-value {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--black);
+  }
+
+  .meta-value.status-denied { color: var(--red); }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ALERT BANNER */
+  .alert {
+    background: var(--black);
+    color: var(--white);
+    padding: 20px 24px;
+    margin: 40px 0;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .alert-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--red);
+    font-weight: 600;
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  .alert-text {
+    font-size: 13px;
+    line-height: 1.6;
+    opacity: 0.85;
+  }
+
+  .alert-text strong { color: var(--white); opacity: 1; }
+
+  /* SECTION */
+  section {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .section-number {
+    font-size: 11px;
+    color: var(--gray-400);
+    letter-spacing: 0.08em;
+  }
+
+  h2 {
+    font-family: var(--mono);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* FINDINGS */
+  .finding {
+    display: grid;
+    grid-template-columns: 3px 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .finding-bar { background: var(--red); }
+
+  .finding-content {}
+
+  .finding-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .finding-body {
+    color: var(--gray-600);
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  .finding-body strong { color: var(--black); }
+
+  /* QUOTE BLOCK */
+  .quote-block {
+    border-left: 3px solid var(--black);
+    padding: 16px 24px;
+    margin: 24px 0;
+    background: var(--gray-100);
+  }
+
+  .quote-text {
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+
+  .quote-attribution {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+  }
+
+  /* TIMELINE */
+  .timeline { list-style: none; }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--gray-200);
+    align-items: baseline;
+  }
+
+  .timeline-item:last-child { border-bottom: none; }
+
+  .timeline-date {
+    font-size: 11px;
+    color: var(--gray-400);
+    letter-spacing: 0.04em;
+  }
+
+  .timeline-event {
+    font-size: 12px;
+    color: var(--black);
+    line-height: 1.6;
+  }
+
+  .timeline-event .highlight {
+    color: var(--red);
+    font-weight: 500;
+  }
+
+  /* DOCUMENTS */
+  .doc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--gray-200);
+    border: 1px solid var(--gray-200);
+    margin-top: 8px;
+  }
+
+  .doc-card {
+    background: var(--white);
+    padding: 24px;
+    cursor: pointer;
+    transition: background 0.15s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .doc-card:hover { background: var(--gray-100); }
+
+  .doc-type {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 10px;
+  }
+
+  .doc-title {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    color: var(--black);
+  }
+
+  .doc-date {
+    font-size: 11px;
+    color: var(--gray-400);
+  }
+
+  .doc-status {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    margin-top: 12px;
+    font-weight: 500;
+  }
+
+  .doc-status.available { background: var(--black); color: var(--white); }
+  .doc-status.withheld { background: var(--red); color: var(--white); }
+  .doc-status.redacted { background: var(--gray-200); color: var(--gray-600); }
+
+  /* WITHHELD TABLE */
+  .withheld-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  .withheld-table th {
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--black);
+    font-weight: 500;
+  }
+
+  .withheld-table td {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--gray-200);
+    vertical-align: top;
+    padding-right: 24px;
+    line-height: 1.6;
+  }
+
+  .withheld-table td:last-child { color: var(--red); padding-right: 0; }
+
+  /* CTA */
+  .cta-section {
+    background: var(--black);
+    color: var(--white);
+    padding: 64px 32px;
+    margin-top: 0;
+  }
+
+  .cta-inner {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .cta-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .cta-headline {
+    font-family: var(--mono);
+    font-size: clamp(20px, 3vw, 32px);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    max-width: 600px;
+  }
+
+  .cta-body {
+    font-size: 13px;
+    opacity: 0.6;
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--white);
+    color: var(--black);
+    padding: 14px 28px;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { opacity: 0.85; }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--white);
+    padding: 14px 28px;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: border-color 0.15s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.7); }
+
+  /* LEGISLATOR LOOKUP */
+  .lookup-box {
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    padding: 32px;
+    margin-top: 32px;
+  }
+
+  .lookup-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 16px;
+  }
+
+  .lookup-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .lookup-input {
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 12px 16px;
+    border: 1px solid var(--gray-200);
+    background: var(--white);
+    flex: 1;
+    min-width: 200px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .lookup-input:focus { border-color: var(--black); }
+
+  .lookup-btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  .lookup-btn:hover { opacity: 0.8; }
+
+  .lookup-result {
+    margin-top: 20px;
+    padding: 16px;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    display: none;
+  }
+
+  .lookup-result.visible { display: block; }
+
+  .lookup-result-name {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .lookup-result-contact {
+    font-size: 12px;
+    color: var(--gray-600);
+    margin-bottom: 12px;
+  }
+
+  .lookup-result a {
+    color: var(--black);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 32px;
+    border-top: 1px solid var(--gray-200);
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-note {
+    font-size: 11px;
+    color: var(--gray-400);
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 11px;
+  }
+
+  .footer-links a {
+    color: var(--gray-400);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+
+  .footer-links a:hover { color: var(--black); }
+
+  /* UTILITY */
+  .red { color: var(--red); }
+  .mono { font-family: var(--mono); }
+
+  @media (max-width: 600px) {
+    .topbar-right { display: none; }
+    .timeline-item { grid-template-columns: 1fr; gap: 4px; }
+    .timeline-date { font-size: 10px; }
+    .hero { padding: 40px 20px 32px; }
+    .container { padding: 0 20px; }
+    footer { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">PENNSYLVANIA RTKL // PUBLIC RECORD ARCHIVE</div>
+  <div class="topbar-right">
+    <a href="#documents">Documents</a>
+    <a href="#findings">Findings</a>
+    <a href="#act">Take Action</a>
+    <a href="https://github.com/ajmail/siger-recusal-records" target="_blank">GitHub</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="case-number">RTKL Request No. 2026-078 &nbsp;/&nbsp; Filed April 7, 2026 &nbsp;/&nbsp; Response June 26, 2026</div>
+  <h1>Pennsylvania Cannot Produce a Written Record of Rick Siger's Recusal from InnovatePGH.</h1>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <div class="meta-label">Requestor</div>
+      <div class="meta-value">Ajmail Matin</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Agency</div>
+      <div class="meta-value">DCED</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Request Status</div>
+      <div class="meta-value status-denied">Denied</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Pages Produced</div>
+      <div class="meta-value">323 (accommodation)</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Appeal Deadline</div>
+      <div class="meta-value">July 17, 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+  <!-- ALERT -->
+  <div class="alert">
+    <div class="alert-label">Finding</div>
+    <div class="alert-text">
+      DCED confirmed in writing that Secretary Siger recused himself from all InnovatePGH matters from the beginning of his tenure. The 323-page records production contains <strong>no written InnovatePGH abstention instrument.</strong> The agency's own denial letter admits the two produced memos were used as templates for "other non-specifically named recusals." No document names InnovatePGH.
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <section id="timeline">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <h2>Timeline</h2>
+    </div>
+    <ul class="timeline">
+      <li class="timeline-item">
+        <span class="timeline-date">Feb 9, 2023</span>
+        <span class="timeline-event">Siger signs two Abstention Memoranda: Jewish Federation of Greater Pittsburgh and Carnegie Mellon University. <span class="highlight">No InnovatePGH memo is signed.</span></span>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">Feb 6, 2026</span>
+        <span class="timeline-event">Chief Counsel Lori Irwin emails Siger re: "Conflict of Interest Protocols" document, described as pending senior staff presentation and department-wide dissemination. <span class="highlight">Document withheld.</span></span>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">Feb 26, 2026</span>
+        <span class="timeline-event">Assistant Counsel Britt Muniz emails Siger: "Follow up on Recusal Question." Body entirely redacted. <span class="highlight">Six weeks before Matin's outreach.</span></span>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">Apr 2, 2026 — 11:26 PM</span>
+        <span class="timeline-event">Matin emails Deputy Secretary Gilburg with accountability questions. Gilburg forwards to Siger the same night: <span class="highlight">"Ajmail has now reached out to me directly. Let's discuss tmrw."</span></span>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">Apr 3, 2026 — 6:15 AM</span>
+        <span class="timeline-event">Siger convenes Chief Counsel, Communications Director, and Executive Deputy Secretary. Writes internally: <span class="highlight">"I do have a recusal on file for innovatepgh I believe."</span></span>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">Apr 6, 2026</span>
+        <span class="timeline-event">Gilburg confirms in writing to Matin: "Secretary Rick Siger, from the beginning of his tenure with DCED, has recused himself from all decisions, discussions, inquiries, comments or questions concerning Innovate PGH."</span>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">Apr 7, 2026</span>
+        <span class="timeline-event">RTKL 2026-078 filed with DCED open records officer.</span>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">Jun 26, 2026</span>
+        <span class="timeline-event">Final response from Governor's Office of General Counsel. Request denied on specificity grounds. 323 pages produced as accommodation. <span class="highlight">No InnovatePGH abstention memo present.</span></span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- FINDINGS -->
+  <section id="findings">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <h2>Key Findings</h2>
+    </div>
+
+    <div class="finding">
+      <div class="finding-bar"></div>
+      <div class="finding-content">
+        <div class="finding-title">1. No InnovatePGH Abstention Memo Exists in the Production</div>
+        <div class="finding-body">
+          The production contains two formal Abstention Memoranda dated February 9, 2023. One covers the Jewish Federation of Greater Pittsburgh. One covers Carnegie Mellon University. Neither covers InnovatePGH. DCED's denial letter states these memos were used as "authority documents for other non-specifically named recusals." InnovatePGH (EIN 27-1727604) is an independent 501(c)(3). It is not a CMU subsidiary. Siger served as Vice Chair of InnovatePGH's board directly. That conflict is specific to InnovatePGH and is not resolved by a CMU abstention.
+        </div>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"I do have a recusal on file for innovatepgh I believe."</div>
+      <div class="quote-attribution">Secretary Rick Siger — Internal DCED Email — April 3, 2026, 6:15 AM</div>
+    </div>
+
+    <div class="finding">
+      <div class="finding-bar"></div>
+      <div class="finding-content">
+        <div class="finding-title">2. Six Senior Officials Coordinated a Four-Sentence Response</div>
+        <div class="finding-body">
+          Within hours of Matin's April 2 email, Siger convened his Chief Counsel, Communications Director, Executive Deputy Secretary, and two additional senior staff to coordinate a response. The resulting reply was four sentences confirming a recusal that no document in the production supports. You do not deploy six senior officials including legal and communications leadership to answer a routine constituent inquiry.
+        </div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="finding-bar"></div>
+      <div class="finding-content">
+        <div class="finding-title">3. A COI Protocols Document Was Under Development and Withheld</div>
+        <div class="finding-body">
+          On February 6, 2026, Chief Counsel Irwin emailed Siger referencing a Conflict of Interest Protocols document described as pending presentation to senior DCED staff and department-wide dissemination. The document was withheld as predecisional. A completed policy document ready for department-wide distribution is a public record. Whether it was finalized or abandoned is unresolved. The OOR appeal will seek its production.
+        </div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="finding-bar"></div>
+      <div class="finding-content">
+        <div class="finding-title">4. The Recusal Cannot Create Real Separation</div>
+        <div class="finding-body">
+          Sean Luther is CEO of InnovatePGH. Sean Luther co-governs Team Pennsylvania alongside Secretary Siger. Team Pennsylvania sets economic development policy that DCED implements. A recusal from InnovatePGH that does not account for this co-governance relationship is structural separation on paper only. The same network governs the policy, the funding, and the intermediaries simultaneously.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCUMENTS -->
+  <section id="documents">
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <h2>Document Archive</h2>
+    </div>
+
+    <div class="doc-grid">
+      <a class="doc-card" href="#" target="_blank">
+        <div class="doc-type">RTKL Response</div>
+        <div class="doc-title">Final Response Letter — Shawn Kerns, Interim Agency Open Records Officer</div>
+        <div class="doc-date">June 26, 2026</div>
+        <span class="doc-status available">Available</span>
+      </a>
+      <a class="doc-card" href="#" target="_blank">
+        <div class="doc-type">RTKL Production</div>
+        <div class="doc-title">323-Page Accommodation Production — Internal Emails and Records</div>
+        <div class="doc-date">June 26, 2026</div>
+        <span class="doc-status available">Available</span>
+      </a>
+      <a class="doc-card" href="#" target="_blank">
+        <div class="doc-type">Recusal Memo</div>
+        <div class="doc-title">Abstention Memorandum — Jewish Federation of Greater Pittsburgh</div>
+        <div class="doc-date">February 9, 2023</div>
+        <span class="doc-status available">Available</span>
+      </a>
+      <a class="doc-card" href="#" target="_blank">
+        <div class="doc-type">Recusal Memo</div>
+        <div class="doc-title">Abstention Memorandum — Carnegie Mellon University</div>
+        <div class="doc-date">February 9, 2023</div>
+        <span class="doc-status available">Available</span>
+      </a>
+      <div class="doc-card">
+        <div class="doc-type">Withheld</div>
+        <div class="doc-title">Conflict of Interest Protocols Document — Irwin to Siger</div>
+        <div class="doc-date">February 6, 2026</div>
+        <span class="doc-status withheld">Withheld — Predecisional</span>
+      </div>
+      <div class="doc-card">
+        <div class="doc-type">Withheld</div>
+        <div class="doc-title">"Follow up on Recusal Question" — Muniz to Siger (body redacted)</div>
+        <div class="doc-date">February 26, 2026</div>
+        <span class="doc-status withheld">Withheld — Atty-Client</span>
+      </div>
+      <div class="doc-card">
+        <div class="doc-type">Missing</div>
+        <div class="doc-title">InnovatePGH Abstention Memorandum</div>
+        <div class="doc-date">Not produced</div>
+        <span class="doc-status redacted">Not in Production</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px;">
+      <table class="withheld-table">
+        <thead>
+          <tr>
+            <th>Document</th>
+            <th>Date</th>
+            <th>Claimed Exemption</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Muniz-to-Siger "Follow up on Recusal Question" (body)</td>
+            <td>Feb 26, 2026</td>
+            <td>Attorney-client privilege</td>
+          </tr>
+          <tr>
+            <td>Conflict of Interest Protocols document</td>
+            <td>Feb 6, 2026</td>
+            <td>Predecisional deliberations</td>
+          </tr>
+          <tr>
+            <td>Draft COI protocols</td>
+            <td>Feb 2026</td>
+            <td>Predecisional deliberations</td>
+          </tr>
+          <tr>
+            <td>Body of Ickes emails in April 3 coordination chain</td>
+            <td>Apr 3, 2026</td>
+            <td>Predecisional deliberations</td>
+          </tr>
+          <tr>
+            <td>Multiple email bodies involving attorneys</td>
+            <td>Various</td>
+            <td>Attorney work product</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</div>
+
+<!-- CTA -->
+<div class="cta-section" id="act">
+  <div class="cta-inner">
+    <div class="cta-label">Take Action</div>
+    <div class="cta-headline">Pennsylvania is considering $350 million in new innovation funding. Your legislator needs to hear from you.</div>
+    <div class="cta-body">
+      SB 1175 would authorize $350 million through innovation funding intermediaries with no direct disbursement floor to founders. The Pittsburgh Compact demands 75% of every state innovation dollar reach founders directly, verified through public audit records. The conflict management infrastructure documented here is why that mathematical floor matters.
+    </div>
+
+    <div class="cta-actions">
+      <a href="https://www.legis.state.pa.us/cfdocs/legis/home/findyourlegislator/" target="_blank" class="btn-primary">Find Your Legislator</a>
+      <a href="https://pittsburghcompact.org" target="_blank" class="btn-secondary">Pittsburgh Compact</a>
+      <a href="https://github.com/ajmail/siger-recusal-records" target="_blank" class="btn-secondary">Full Archive on GitHub</a>
+    </div>
+
+    <div class="lookup-box">
+      <div class="lookup-label">Or enter your zip code to find your PA state representative</div>
+      <div class="lookup-row">
+        <input class="lookup-input" type="text" id="zipInput" placeholder="Enter ZIP code..." maxlength="5">
+        <button class="lookup-btn" onclick="lookupLegislator()">Find Rep</button>
+      </div>
+      <div class="lookup-result" id="lookupResult">
+        <div class="lookup-result-name" id="resultName"></div>
+        <div class="lookup-result-contact" id="resultContact"></div>
+        <a id="resultLink" href="#" target="_blank">Contact This Legislator →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-note">
+    All documents in this archive are public records obtained through Pennsylvania's Right-to-Know Law, 65 P.S. § 67.101 et seq. No characterization in this archive goes beyond what the documents show. OOR appeal pending. Appeal deadline: July 17, 2026.
+  </div>
+  <div class="footer-links">
+    <a href="https://pittsburghcompact.org" target="_blank">pittsburghcompact.org</a>
+    <a href="https://github.com/ajmail/siger-recusal-records" target="_blank">github.com/ajmail/siger-recusal-records</a>
+    <a href="mailto:ajmail.matin@gmail.com">ajmail.matin@gmail.com</a>
+    <a href="https://ssrn.com" target="_blank">SSRN Working Papers</a>
+  </div>
+</footer>
+
+<script>
+function lookupLegislator() {
+  const zip = document.getElementById('zipInput').value.trim();
+  if (zip.length !== 5 || isNaN(zip)) {
+    alert('Please enter a valid 5-digit ZIP code.');
+    return;
+  }
+  const result = document.getElementById('lookupResult');
+  const name = document.getElementById('resultName');
+  const contact = document.getElementById('resultContact');
+  const link = document.getElementById('resultLink');
+
+  name.textContent = 'Pennsylvania House Member';
+  contact.textContent = 'Use the PA General Assembly lookup to find your specific representative for ZIP ' + zip;
+  link.href = 'https://www.legis.state.pa.us/cfdocs/legis/home/findyourlegislator/';
+  link.textContent = 'Find Your Representative at PA General Assembly →';
+  result.classList.add('visible');
+}
+
+document.getElementById('zipInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') lookupLegislator();
+});
+</script>
+
+</body>
+</html>
